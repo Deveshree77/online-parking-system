@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SmartPark Admin Login — Access the management dashboard">
+    <title>Admin Login — SmartPark</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-brand">
+                <div class="brand-icon">🅿</div>
+                <h1>SmartPark Admin</h1>
+                <p class="subtitle">Sign in to access the management dashboard</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="admin@smartpark.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginBtn">
+                    🔐 Sign In
+                </button>
+            </form>
+
+            <p class="text-center mt-lg" style="font-size: 0.8rem; color: var(--text-muted);">
+                Not an admin? <a href="../login.html">User Login →</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/admin-app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (AdminApp.isLoggedIn() && AdminApp.isAdmin()) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('loginBtn');
+                AdminApp.setButtonLoading(btn, true);
+
+                try {
+                    const data = await AdminApp.apiFetch('/auth/login', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            email: document.getElementById('email').value,
+                            password: document.getElementById('password').value
+                        })
+                    });
+
+                    if (data.role !== 'ADMIN') {
+                        throw new Error('This account does not have admin privileges.');
+                    }
+
+                    AdminApp.saveAuth(data);
+                    AdminApp.showToast('Welcome back, ' + data.fullName + '!', 'success');
+                    setTimeout(() => window.location.href = 'index.html', 800);
+                } catch (error) {
+                    AdminApp.showToast(error.message, 'error');
+                    AdminApp.setButtonLoading(btn, false);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

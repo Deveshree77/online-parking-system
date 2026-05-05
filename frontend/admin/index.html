@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SmartPark Admin Dashboard — Overview and Analytics">
+    <title>Dashboard — SmartPark Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">🅿</div>
+                SmartPark
+                <span class="sidebar-badge">ADMIN</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section-title">Main</div>
+                <a href="index.html" class="sidebar-link">
+                    <span class="link-icon">📊</span> Dashboard
+                </a>
+                <a href="bookings.html" class="sidebar-link">
+                    <span class="link-icon">📋</span> Bookings
+                </a>
+                <div class="sidebar-section-title">Management</div>
+                <a href="parking.html" class="sidebar-link">
+                    <span class="link-icon">🅿️</span> Parking Lots
+                </a>
+                <a href="users.html" class="sidebar-link">
+                    <span class="link-icon">👥</span> Users
+                </a>
+                <div class="sidebar-section-title">External</div>
+                <a href="../index.html" class="sidebar-link">
+                    <span class="link-icon">🌐</span> View Website
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar" id="sidebarAvatar">A</div>
+                    <div class="sidebar-user-info">
+                        <div class="name" id="sidebarUserName">Admin</div>
+                        <div class="role">Administrator</div>
+                    </div>
+                    <button class="btn btn-sm btn-secondary" onclick="AdminApp.logout()" title="Logout">↗</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p class="header-subtitle">Overview of your parking operations</p>
+                </div>
+                <div>
+                    <span id="currentDate" style="color: var(--text-muted); font-size: 0.85rem;"></span>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card purple">
+                    <div class="stat-icon purple">💰</div>
+                    <div class="stat-value" id="statRevenue">—</div>
+                    <div class="stat-label">Total Revenue</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-icon blue">📋</div>
+                    <div class="stat-value" id="statBookings">—</div>
+                    <div class="stat-label">Total Bookings</div>
+                </div>
+                <div class="stat-card emerald">
+                    <div class="stat-icon emerald">🚗</div>
+                    <div class="stat-value" id="statActive">—</div>
+                    <div class="stat-label">Active Parkings</div>
+                </div>
+                <div class="stat-card amber">
+                    <div class="stat-icon amber">📈</div>
+                    <div class="stat-value" id="statOccupancy">—</div>
+                    <div class="stat-label">Occupancy Rate</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📈 Revenue Trend (7 Days)</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📊 Booking Status</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Bookings & Top Lots -->
+            <div class="charts-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🕐 Recent Bookings</h3>
+                        <a href="bookings.html" class="btn btn-sm btn-secondary">View All</a>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Ref</th>
+                                    <th>Lot</th>
+                                    <th>Slot</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentBookingsTable">
+                                <tr><td colspan="5" class="text-center text-muted">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🏆 Top Performing Lots</h3>
+                    </div>
+                    <div id="topLotsContainer">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats Row -->
+            <div class="stats-grid" style="margin-top: var(--space-xl);">
+                <div class="stat-card purple">
+                    <div class="stat-icon purple">👥</div>
+                    <div class="stat-value" id="statUsers">—</div>
+                    <div class="stat-label">Registered Users</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-icon blue">🅿️</div>
+                    <div class="stat-value" id="statLots">—</div>
+                    <div class="stat-label">Parking Lots</div>
+                </div>
+                <div class="stat-card emerald">
+                    <div class="stat-icon emerald">🔲</div>
+                    <div class="stat-value" id="statSlots">—</div>
+                    <div class="stat-label">Total Slots</div>
+                </div>
+                <div class="stat-card amber">
+                    <div class="stat-icon amber">💵</div>
+                    <div class="stat-value" id="statTodayRevenue">—</div>
+                    <div class="stat-label">Today's Revenue</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/admin-app.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

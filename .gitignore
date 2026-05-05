@@ -1,0 +1,8 @@
+backend/target/
+backend/jdk-17/
+backend/apache-maven-3.9.14/
+.DS_Store
+*.jar
+*.class
+.idea/
+.vscode/

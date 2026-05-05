@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find parking spots near you with SmartPark's interactive map.">
+    <title>Find Parking — SmartPark</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="bg-animated"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="logo-icon">🅿</div>
+            SmartPark
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html" class="active">Find Parking</a></li>
+            <li><a href="history.html">My Bookings</a></li>
+        </ul>
+        <div class="navbar-user" id="navAuth"></div>
+    </nav>
+
+    <div class="page-content">
+        <div class="container">
+            <!-- Location header -->
+            <div class="section-header" style="margin-top: var(--space-xl);">
+                <div class="flex-between">
+                    <div>
+                        <h1>Find Parking</h1>
+                        <p id="locationText">Detecting your location...</p>
+                    </div>
+                    <div class="location-badge" id="locationBadge">
+                        <span class="dot"></span>
+                        <span id="cityDisplay">Locating...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Map Section -->
+                <div>
+                    <div class="map-container" id="mapContainer">
+                        <div id="map" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </div>
+
+                    <!-- Lots Grid -->
+                    <div class="section-header mt-xl">
+                        <div class="flex-between">
+                            <h2>Parking Areas</h2>
+                            <select id="cityFilter" class="form-input" style="width: auto; min-width: 180px;">
+                                <option value="">All Cities</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="lots-grid" id="lotsGrid">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="dashboard-sidebar">
+                    <div class="sidebar-section">
+                        <div class="card">
+                            <h3 class="card-title" style="font-size: 1rem;">📍 How It Works</h3>
+                            <hr class="divider">
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8;">
+                                <p><strong>1.</strong> We detect your city automatically</p>
+                                <p><strong>2.</strong> Browse nearby parking areas</p>
+                                <p><strong>3.</strong> Select an area to view available slots</p>
+                                <p><strong>4.</strong> Choose a slot, pay, and get your QR token</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="card">
+                            <h3 class="card-title" style="font-size: 1rem;">⚡ Quick Stats</h3>
+                            <hr class="divider">
+                            <div id="quickStats" style="font-size: 0.9rem;">
+                                <div class="flex-between mb-md">
+                                    <span class="text-muted">Total Areas</span>
+                                    <span class="text-blue" id="statTotalLots">—</span>
+                                </div>
+                                <div class="flex-between mb-md">
+                                    <span class="text-muted">Available Slots</span>
+                                    <span class="text-success" id="statAvailableSlots">—</span>
+                                </div>
+                                <div class="flex-between">
+                                    <span class="text-muted">Cities</span>
+                                    <span id="statCities">—</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SmartPark. Built for smarter cities.</p>
+        </div>
+    </footer>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

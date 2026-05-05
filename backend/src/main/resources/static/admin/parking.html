@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SmartPark Admin — Manage Parking Lots and Slots">
+    <title>Parking Lots — SmartPark Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">🅿</div>
+                SmartPark
+                <span class="sidebar-badge">ADMIN</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section-title">Main</div>
+                <a href="index.html" class="sidebar-link"><span class="link-icon">📊</span> Dashboard</a>
+                <a href="bookings.html" class="sidebar-link"><span class="link-icon">📋</span> Bookings</a>
+                <div class="sidebar-section-title">Management</div>
+                <a href="parking.html" class="sidebar-link"><span class="link-icon">🅿️</span> Parking Lots</a>
+                <a href="users.html" class="sidebar-link"><span class="link-icon">👥</span> Users</a>
+                <div class="sidebar-section-title">External</div>
+                <a href="../index.html" class="sidebar-link"><span class="link-icon">🌐</span> View Website</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar" id="sidebarAvatar">A</div>
+                    <div class="sidebar-user-info">
+                        <div class="name" id="sidebarUserName">Admin</div>
+                        <div class="role">Administrator</div>
+                    </div>
+                    <button class="btn btn-sm btn-secondary" onclick="AdminApp.logout()" title="Logout">↗</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <h1>Parking Lots</h1>
+                    <p class="header-subtitle">Create, edit, and manage your parking locations</p>
+                </div>
+                <button class="btn btn-primary" onclick="AdminApp.openModal('lotModal')">
+                    ➕ Add Parking Lot
+                </button>
+            </div>
+
+            <!-- Lots Grid -->
+            <div class="lots-manage-grid" id="lotsGrid">
+                <div class="loading-spinner"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Lot Modal -->
+    <div class="modal-overlay" id="lotModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Parking Lot</h2>
+                <button class="modal-close" onclick="AdminApp.closeModal('lotModal')">✕</button>
+            </div>
+            <form id="lotForm">
+                <input type="hidden" id="lotEditId">
+                <div class="form-group">
+                    <label class="form-label" for="lotName">Lot Name</label>
+                    <input type="text" id="lotName" class="form-input" placeholder="e.g. Phoenix Mall Parking" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="lotAddress">Address</label>
+                    <input type="text" id="lotAddress" class="form-input" placeholder="Full address" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="lotCity">City</label>
+                        <input type="text" id="lotCity" class="form-input" placeholder="e.g. Mumbai" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lotSlots">Total Slots</label>
+                        <input type="number" id="lotSlots" class="form-input" placeholder="15" min="1" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="lotLat">Latitude</label>
+                        <input type="number" step="any" id="lotLat" class="form-input" placeholder="19.0760" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lotLng">Longitude</label>
+                        <input type="number" step="any" id="lotLng" class="form-input" placeholder="72.8777" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="lotRate">Rate per Hour (₹)</label>
+                        <input type="number" step="0.01" id="lotRate" class="form-input" placeholder="50.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lotExtraRate">Extra Rate/Min (₹)</label>
+                        <input type="number" step="0.01" id="lotExtraRate" class="form-input" placeholder="2.00" value="2.00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="lotBuffer">Buffer Minutes</label>
+                    <input type="number" id="lotBuffer" class="form-input" placeholder="15" value="15">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="lotSubmitBtn">
+                    Create Parking Lot
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/admin-app.js"></script>
+    <script src="js/parking.js"></script>
+</body>
+</html>

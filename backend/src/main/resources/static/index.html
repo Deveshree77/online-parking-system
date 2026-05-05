@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SmartPark - India's smartest online parking booking system. Find, book, and pay for parking spots instantly.">
+    <title>SmartPark — Smart Parking, Simplified</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="bg-animated"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="logo-icon">🅿</div>
+            SmartPark
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="dashboard.html">Find Parking</a></li>
+            <li><a href="history.html">My Bookings</a></li>
+        </ul>
+        <div class="navbar-user" id="navAuth">
+            <a href="login.html" class="btn btn-secondary btn-sm">Log In</a>
+            <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero page-content">
+        <div class="container">
+            <h1 class="hero-title">Park Smarter,<br>Not Harder</h1>
+            <p class="hero-subtitle">
+                Find and book parking spots in seconds. Real-time availability, secure payments, and QR-based entry — all in one place.
+            </p>
+            <div class="hero-actions">
+                <a href="dashboard.html" class="btn btn-primary btn-lg">
+                    🗺️ Find Parking Near Me
+                </a>
+                <a href="signup.html" class="btn btn-secondary btn-lg">
+                    Create Free Account
+                </a>
+            </div>
+
+            <!-- Features -->
+            <div class="features-grid">
+                <div class="card feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Location-Based Search</h3>
+                    <p>Automatically detects your city and shows nearby parking areas on an interactive map.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Availability</h3>
+                    <p>See live slot availability with color-coded grid. No more driving around looking for spots.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure Booking</h3>
+                    <p>Slots are locked during payment. No double bookings, ever. Protected by bank-grade encryption.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>QR-Based Entry</h3>
+                    <p>Get a unique QR token after booking. Just scan &amp; go — no tickets, no hassle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SmartPark. Built for smarter cities.</p>
+        </div>
+    </footer>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/app.js"></script>
+    <script>
+        // Update navbar if logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            SmartPark.updateNavbar();
+        });
+    </script>
+</body>
+</html>

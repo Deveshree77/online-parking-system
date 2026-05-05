@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your parking booking payment on SmartPark.">
+    <title>Payment — SmartPark</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="bg-animated"></div>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="logo-icon">🅿</div>
+            SmartPark
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Find Parking</a></li>
+            <li><a href="history.html">My Bookings</a></li>
+        </ul>
+        <div class="navbar-user" id="navAuth"></div>
+    </nav>
+
+    <div class="page-content">
+        <div class="container">
+            <div class="payment-section" style="margin-top: var(--space-xl);">
+
+                <!-- Timer -->
+                <div class="timer-container" id="timerSection">
+                    <div class="timer-circle" id="timerCircle">
+                        <span class="timer-value" id="timerValue">5:00</span>
+                    </div>
+                    <p class="timer-label">Slot locked — complete payment before time runs out</p>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📋 Booking Summary</h3>
+                    </div>
+                    <div class="booking-summary" id="bookingSummary">
+                        <div class="summary-item">
+                            <div class="summary-label">Parking Area</div>
+                            <div class="summary-value" id="summaryLot">—</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Slot</div>
+                            <div class="summary-value" id="summarySlot">—</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Start Time</div>
+                            <div class="summary-value" id="summaryStart">—</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">End Time</div>
+                            <div class="summary-value" id="summaryEnd">—</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Duration</div>
+                            <div class="summary-value" id="summaryDuration">—</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Buffer Time</div>
+                            <div class="summary-value" id="summaryBuffer">15 mins</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amount -->
+                <div class="card mt-lg">
+                    <div class="amount-display">
+                        <div class="amount-label">Total Amount</div>
+                        <div class="amount-value" id="paymentAmount">₹0</div>
+                    </div>
+
+                    <!-- Simulated Payment Form -->
+                    <div class="payment-form" id="paymentForm">
+                        <h3 style="font-size:1rem; margin-bottom: var(--space-lg);">💳 Payment Details</h3>
+
+                        <div class="form-group">
+                            <label class="form-label" for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" class="form-input" placeholder="4242 4242 4242 4242" value="4242 4242 4242 4242">
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+                            <div class="form-group">
+                                <label class="form-label" for="cardExpiry">Expiry</label>
+                                <input type="text" id="cardExpiry" class="form-input" placeholder="12/28" value="12/28">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cardCvv">CVV</label>
+                                <input type="text" id="cardCvv" class="form-input" placeholder="123" value="123">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success btn-lg btn-block" id="payNowBtn">
+                            🔐 Pay Now
+                        </button>
+
+                        <p class="text-center mt-md" style="font-size: 0.75rem; color: var(--text-muted);">
+                            🔒 Payments are simulated in test mode. No real charges.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Success State (hidden by default) -->
+                <div class="card mt-lg hidden" id="successSection">
+                    <div class="success-checkmark">✓</div>
+                    <h2 class="text-center">Booking Confirmed!</h2>
+                    <p class="text-center text-muted mt-sm">Your parking spot has been reserved successfully.</p>
+                    <hr class="divider">
+                    <div class="text-center">
+                        <a href="#" class="btn btn-primary btn-lg" id="viewQrBtn">
+                            📱 View QR Token
+                        </a>
+                        <a href="history.html" class="btn btn-secondary btn-lg" style="margin-left: var(--space-md);">
+                            📜 View History
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/app.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>
